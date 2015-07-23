@@ -1,2 +1,2 @@
-# Cordova-Phonegap-plugin-
+# cordova-phonegap-plugins
 Testing out various plugins via ngCordova
