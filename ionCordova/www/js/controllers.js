@@ -20,6 +20,41 @@ angular.module('starter.controllers', [])
     });
 })
 
+
+.controller("ExampleController", function($ionicPlatform, $scope, $cordovaCalendar) {
+      $ionicPlatform.ready(function() {
+
+        // prep some variables
+        var startDate = new Date(2015,2,15,18,30,0,0,0); // beware: month 0 = january, 11 = december
+        var endDate = new Date(2015,2,15,19,30,0,0,0);
+        var title = "My nice event";
+        var eventLocation = "Home";
+        var notes = "Some notes about this event.";
+        var success = function(message) { alert("Success: " + JSON.stringify(message)); };
+        var error = function(message) { alert("Error: " + message); };
+        var calendarName = "Batman";
+        var calOptions = window.plugins.calendar.getCalendarOptions();
+        calOptions.calendarName = "Batman";
+
+    $scope.createCalendar = function(){
+        window.plugins.calendar.createCalendar(calendarName,success,error);
+    };
+
+    $scope.createEvent = function() {
+        //window.plugins.calendar.createEventInteractivelyWithOptions(title,eventLocation,notes,startDate,endDate,calOptions,success,error);
+        window.plugins.calendar.createEvent(title,eventLocation,notes,startDate,endDate,success,error);
+    };
+
+    $scope.deleteCalendar = function() {
+      window.plugins.calendar.deleteCalendar(calendarName,success,error);
+    };
+
+    $scope.openCalendar = function() {
+       window.plugins.calendar.openCalendar(endDate, success, error);
+    };  
+});
+})
+
 .controller('BatteryCtrl', function($ionicPlatform, $rootScope, $scope, $cordovaBatteryStatus) {
  
     $ionicPlatform.ready(function() {
@@ -93,7 +128,7 @@ angular.module('starter.controllers', [])
         // Keep watching for change in values
         // watch Acceleration
         var options = {
-            frequency: 2000
+            frequency: 100
         };
  
         $scope.watch = $cordovaDeviceMotion.watchAcceleration(options);

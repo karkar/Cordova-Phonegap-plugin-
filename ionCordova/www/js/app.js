@@ -105,7 +105,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
         views: {
             'menuContent': {
                 templateUrl: "templates/sqlite.html",
-                controller: 'SqliteCtrl'
+                controller: 'ExampleController'
             }
         }
     })
